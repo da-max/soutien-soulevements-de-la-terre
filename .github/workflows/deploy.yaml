@@ -5,7 +5,11 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  deploy:
+
+    permissions:
+      pages: write
+      id-token: write
 
     environment:
       name: github-pages
@@ -28,22 +32,9 @@ jobs:
           name: github-pages
           path: dist
 
-
-  deploy:
-    needs: build
-
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    runs-on: ubuntu-latest
-    steps:
       - name: Setup Pages
         uses: actions/configure-pages@v2
-        
+
       - name: Deploy to Github Pages
+        id: deployment
         uses: actions/deploy-pages@v2
