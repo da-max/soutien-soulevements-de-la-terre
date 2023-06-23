@@ -5,11 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  deploy:
-
-    permissions:
-      pages: write
-      id-token: write
+  build:
 
     environment:
       name: github-pages
@@ -27,11 +23,25 @@ jobs:
       - run: npm run build
 
       - name: Upload the artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-pages-artifact@v1
         with:
           name: github-pages
           path: dist
 
+
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
       - name: Setup Pages
         uses: actions/configure-pages@v2
 
