@@ -6,14 +6,15 @@ import addon1 from './static/images/addon-1.png?url'
 import addon2 from './static/images/addon-2.png?url'
 import addon3 from './static/images/addon-3.png?url'
 import addon4 from './static/images/addon-4.png?url'
+import defaultPicture from './static/images/default.svg.webp?url'
 
-import bg from './static/images/bg.png?url'
 import { useGenerateImage } from './hooks/utils'
 import { AddonsList } from './components/AddonsList'
+import { Button } from './components/Utils/Button'
 
 const App = () => {
     const [image1Src, setImage1Src] = createSignal<string>()
-    const [image2Src, setImage2Src] = createSignal<string>(addon1)
+    const [image2Src, setImage2Src] = createSignal<string>()
 
     let canvas: undefined | HTMLCanvasElement
     const [canvasSignal, setCanvasSignal] = createSignal<
@@ -45,24 +46,66 @@ const App = () => {
             flex
             flex-justify-center
             flex-items-center
+            bg-secondary
+            bg-opacity-50
             min-h-screen
-            bg={`url(${bg})`}
         >
             <Card>
-                <div flex flex-gap-8>
+                <h1 text-center font-bold text-10 font-handwriting>
+                    Affiche ton soutien aux
+                    <span text-primary> soulèvements de la terre</span>
+                </h1>
+                <div
+                    flex
+                    flex-gap-8
+                    flex-justify-around
+                    flex-items-center
+                    mt-20
+                    text-5
+                >
+                    <div flex flex-col flex-gap4>
+                        <div>
+                            <h2 mb-2>Choisi un overlay :</h2>
+                            <AddonsList
+                                addons={[addon1, addon2, addon3, addon4]}
+                                onChange={onAddonChange}
+                            />
+                        </div>
+                        <Show
+                            when={
+                                imageProperties().url ||
+                                image2Src() ||
+                                image1Src()
+                            }
+                        >
+                            <img
+                                b-rounded
+                                src={
+                                    imageProperties().url ||
+                                    image2Src() ||
+                                    image1Src()
+                                }
+                                alt=""
+                                width={imageProperties().width}
+                                height={imageProperties().height}
+                            />
+                            <div text-center>
+                                <a href={imageProperties().url} download>
+                                    <Button>
+                                        <i i-tabler={'download'} mr-3 />
+                                        Télécharger l’image
+                                    </Button>
+                                </a>
+                            </div>
+                        </Show>
+                    </div>
                     <div>
-                        <h1 text-center text-8>
-                            Affiche ton soutien aux soulèvements de la terre
-                        </h1>
-                        <form flex flex-justify-center mt-8 text-5>
+                        <form flex flex-justify-center mt-8>
                             <InputFile name={'file'} onChange={onChange}>
-                                Choisir une image
+                                <i i-tabler={'upload'} mr-3 />
+                                Choisi une image
                             </InputFile>
                         </form>
-                        <AddonsList
-                            addons={[addon1, addon2, addon3, addon4]}
-                            onChange={onAddonChange}
-                        />
                     </div>
                     <canvas
                         id={'canvas'}
@@ -71,33 +114,6 @@ const App = () => {
                         height={imageProperties().height}
                         width={imageProperties().width}
                     />
-                    <Show when={imageProperties().url}>
-                        <div flex flex-col>
-                            <img
-                                src={imageProperties().url}
-                                alt=""
-                                width={imageProperties().width}
-                                height={imageProperties().height}
-                            />
-                            <div>
-                                <a
-                                    href={imageProperties().url}
-                                    target="_blank"
-                                    download
-                                    transition
-                                    bg-primary
-                                    px-4
-                                    py-2
-                                    rd-4
-                                    hover-bg-secondary
-                                    cursor-pointer
-                                    shadow-md
-                                >
-                                    Télécharger l’image
-                                </a>
-                            </div>
-                        </div>
-                    </Show>
                 </div>
             </Card>
         </main>

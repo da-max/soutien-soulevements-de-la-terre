@@ -10,17 +10,7 @@ export interface InputFileProps {
 export const InputFile = (props: InputFileProps) => {
     return (
         <div>
-            <label
-                for={props.name}
-                transition
-                bg-primary
-                px-4
-                py-2
-                rd-4
-                hover-bg-secondary
-                cursor-pointer
-                shadow-md
-            >
+            <label button for={props.name}>
                 {props.children}
             </label>
             <input
