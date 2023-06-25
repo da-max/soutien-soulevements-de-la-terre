@@ -1,3 +1,5 @@
+import { A } from '@solidjs/router'
+
 export interface FooterProps {
     class?: string
 }
@@ -24,9 +26,7 @@ export const Footer = (props: FooterProps) => {
                 </a>
             </p>
             <p>
-                <a href="" link>
-                    À propos
-                </a>
+                <A href={'/about'}>À propos</A>
             </p>
         </footer>
     )

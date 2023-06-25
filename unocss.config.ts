@@ -21,7 +21,7 @@ export default defineConfig({
             provider: 'google',
             fonts: {
                 sans: 'Roboto',
-                handwriting: 'Dekko',
+                handwriting: 'Anton',
             },
         }),
     ],
@@ -33,6 +33,7 @@ export default defineConfig({
         },
     },
     shortcuts: {
+        main: 'font-sans bg-secondary bg-opacity-50 text-5 min-h-screen',
         link: 'transition text-primary border-b-2 border-transparent hover-border-b-current',
         button: 'transition px-4 py-2 rd-4 bg-primary hover-bg-secondary cursor-pointer shadow-md flex-inline flex-items-center',
     },

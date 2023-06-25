@@ -33,11 +33,12 @@
         "vite-plugin-solid": "^2.7.0"
     },
     "dependencies": {
+        "@solidjs/router": "^0.8.2",
         "@unocss/reset": "^0.53.3",
         "solid-js": "^1.7.6"
     },
     "lint-staged": {
         "*.{js,ts,tsx}": "eslint --cache --fix",
-        "*.{js,css,md,ts,txs}": "prettier --write"
+        "*.{js,css,md,ts,tsx}": "prettier --write"
     }
 }
