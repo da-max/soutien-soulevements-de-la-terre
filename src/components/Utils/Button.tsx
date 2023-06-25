@@ -8,7 +8,7 @@ export interface ButtonProps {
 export const Button = (props: ButtonProps) => {
     return (
         <button
-            btn
+            button
             onClick={(ev: Event) => {
                 if (props.onClick) {
                     props.onClick(ev)

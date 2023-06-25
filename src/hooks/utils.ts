@@ -43,8 +43,8 @@ export const useGenerateImage = (
                         ...calculateAspectRatioFit(
                             imageObj1.naturalWidth,
                             imageObj1.naturalHeight,
-                            400,
-                            400
+                            300,
+                            300
                         ),
                     })
                 )

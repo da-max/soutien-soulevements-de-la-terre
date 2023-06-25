@@ -10,7 +10,7 @@ export interface InputFileProps {
 export const InputFile = (props: InputFileProps) => {
     return (
         <div>
-            <label button for={props.name}>
+            <label tabindex="0" button for={props.name}>
                 {props.children}
             </label>
             <input

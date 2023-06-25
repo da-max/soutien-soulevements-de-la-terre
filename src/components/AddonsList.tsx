@@ -2,11 +2,12 @@ import { Accessor, createSignal, For } from 'solid-js'
 
 export interface AddonsListProps {
     addons: string[]
+    selectedAddon: string
     onChange: (addon: string) => void
 }
 
 export const AddonsList = (props: AddonsListProps) => {
-    const [image, setImage] = createSignal(undefined)
+    const [image, setImage] = createSignal(props.selectedAddon)
     return (
         <aside flex gap-4>
             <For each={props.addons}>
