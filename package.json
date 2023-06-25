@@ -37,7 +37,7 @@
         "solid-js": "^1.7.6"
     },
     "lint-staged": {
-        "*.js": "eslint --cache --fix",
-        "*.{js,css,md}": "prettier --write"
+        "*.{js,ts,tsx}": "eslint --cache --fix",
+        "*.{js,css,md,ts,txs}": "prettier --write"
     }
 }
