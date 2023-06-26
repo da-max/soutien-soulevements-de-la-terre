@@ -2,8 +2,10 @@ version: '3.9'
 
 services:
     app:
-        image: node:lts
-        command: "bash -c 'npm i && npm run start'"
+        build:
+            context: .
+            dockerfile: Dockerfile
+        command: "sh -c 'pnpm i && pnpm run --parallel start'"
         volumes:
             - .:/usr/src/app:z
         working_dir: /usr/src/app
