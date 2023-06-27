@@ -1,4 +1,7 @@
 {
+    "env": {
+        "node": true
+    },
     "extends": [
         "@soutien-soulevements-de-la-terre/eslint-config"
     ]

@@ -3,7 +3,6 @@ module.exports = {
         config: true,
     },
     env: {
-        browser: true,
         es2021: true,
     },
     extends: [
