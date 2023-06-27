@@ -1,0 +1,7 @@
+{
+  "main": "index.js",
+  "name": "@soutien-soulevements-de-la-terre/prettier-config",
+  "peerDependencies": {
+    "prettier": "2.8.8"
+  }
+}

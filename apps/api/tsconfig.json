@@ -1,13 +1,6 @@
 {
+  "extends": "@soutien-soulevements-de-la-terre/ts-config/tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "target": "es5",
-    "sourceMap": true
   },
-  "exclude": [
-    "node_modules"
-  ]
 }
