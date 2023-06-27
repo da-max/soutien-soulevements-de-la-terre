@@ -5,9 +5,10 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        command: "sh -c 'pnpm i && pnpm run --parallel start'"
+        command: "sh -c 'pnpm i && pnpm run --parallel dev'"
         volumes:
             - .:/usr/src/app:z
         working_dir: /usr/src/app
         ports:
             - '5173:5173'
+            - '3000:3000'

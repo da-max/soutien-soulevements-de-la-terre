@@ -10,7 +10,8 @@
   "author": "Maxime Ben Hassen <maxime.benhassen@fedabian.fr>",
   "license": "ISC",
   "devDependencies": {
-    "husky": "^8.0.3"
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": "eslint --cache --fix",
