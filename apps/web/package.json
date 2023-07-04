@@ -11,6 +11,9 @@
     "license": "MIT",
     "devDependencies": {
         "@iconify-json/tabler": "^1.1.79",
+        "@soutien-soulevements-de-la-terre/eslint-config": "workspace:^",
+        "@soutien-soulevements-de-la-terre/prettier-config": "workspace:^",
+        "@soutien-soulevements-de-la-terre/ts-config": "workspace:^",
         "@unocss/eslint-config": "^0.53.3",
         "@unocss/preset-attributify": "^0.53.3",
         "@unocss/preset-icons": "^0.53.3",
@@ -21,10 +24,7 @@
         "eslint-plugin-solid": "^0.12.1",
         "solid-devtools": "^0.27.3",
         "vite": "^4.3.9",
-        "vite-plugin-solid": "^2.7.0",
-        "@soutien-soulevements-de-la-terre/prettier-config": "workspace:^",
-        "@soutien-soulevements-de-la-terre/eslint-config": "workspace:^",
-        "@soutien-soulevements-de-la-terre/ts-config": "workspace:^"
+        "vite-plugin-solid": "^2.7.0"
     },
     "peerDependencies": {
         "@typescript-eslint/eslint-plugin": "^5.60.0",
