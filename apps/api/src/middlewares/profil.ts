@@ -7,9 +7,9 @@ const router = Router()
 router.get('/twitter', async (req: Request, res: Response) => {
     try {
         if (!twitterAuthClient.token) {
-            twitterAuthClient.token = JSON.parse(
-                req.cookies[TWITTER_COOKIE]
-            ).token
+            twitterAuthClient.token = {
+                access_token: req.cookies[TWITTER_COOKIE] as string,
+            }
         }
         const user = await client.users.findMyUser({
             'user.fields': ['profile_image_url'],
@@ -29,6 +29,7 @@ router.get('/facebook', async (req: Request, res: Response) => {
         console.log(user)
         res.send(user.data)
     } catch (error) {
+        console.log(error)
         res.status(500).send({ msg: 'Error occurred' })
     }
 })

@@ -13,7 +13,8 @@ router.get('/callback', async (req: Request, res: Response) => {
     try {
         const { code } = req.query
         const response = await client.callback(code as string)
-        res.cookie('facebook_token', response.data.toString(), {
+        console.log(response.data)
+        res.cookie('facebook_token', response.data.access_token, {
             expires: new Date(now.setDate(now.getDate() + 10)),
         })
         res.send(response.data)

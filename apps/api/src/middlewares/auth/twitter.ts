@@ -25,7 +25,7 @@ router.get('/callback', async (req: Request, res: Response) => {
         const result = await twitterAuthClient.requestAccessToken(
             code as string
         )
-        res.cookie(TWITTER_COOKIE, result.toString(), {
+        res.cookie(TWITTER_COOKIE, result.token.access_token, {
             expires: new Date(now.setDate(now.getDate() + 10)),
         })
         twitterAuthClient.token = result.token
