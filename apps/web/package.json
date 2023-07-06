@@ -14,6 +14,7 @@
         "@soutien-soulevements-de-la-terre/eslint-config": "workspace:^",
         "@soutien-soulevements-de-la-terre/prettier-config": "workspace:^",
         "@soutien-soulevements-de-la-terre/ts-config": "workspace:^",
+        "@types/js-cookie": "^3.0.3",
         "@unocss/eslint-config": "^0.53.3",
         "@unocss/preset-attributify": "^0.53.3",
         "@unocss/preset-icons": "^0.53.3",
@@ -38,7 +39,9 @@
     },
     "dependencies": {
         "@solidjs/router": "^0.8.2",
+        "@soutien-soulevements-de-la-terre/utils": "workspace:^",
         "@unocss/reset": "^0.53.3",
+        "axios": "^1.4.0",
         "solid-js": "^1.7.6"
     },
     "prettier": "@soutien-soulevements-de-la-terre/prettier-config"

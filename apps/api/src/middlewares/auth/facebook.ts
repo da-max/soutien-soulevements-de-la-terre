@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express'
 import { client } from '../../utils/facebook'
-
+import { Token } from '@soutien-soulevements-de-la-terre/utils'
 const router = Router()
 
 router.get('/', (req: Request, res: Response) => {
@@ -9,15 +9,10 @@ router.get('/', (req: Request, res: Response) => {
 })
 
 router.get('/callback', async (req: Request, res: Response) => {
-    const now = new Date(Date.now())
     try {
         const { code } = req.query
         const response = await client.callback(code as string)
-        console.log(response.data)
-        res.cookie('facebook_token', response.data.access_token, {
-            expires: new Date(now.setDate(now.getDate() + 10)),
-        })
-        res.send(response.data)
+        res.send(response.data as Token)
     } catch (error) {
         res.status(500).send({ msg: 'Error occurred' })
     }

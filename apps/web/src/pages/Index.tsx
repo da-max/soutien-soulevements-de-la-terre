@@ -1,6 +1,6 @@
 import { createSignal, onMount, Show } from 'solid-js'
 
-import { useGenerateImage } from '../hooks/utils'
+import { useGenerateImage } from '../hooks/useGenerateImage'
 import { Card } from '../components/Utils/Card'
 import { RenderImage } from '../components/RenderImage'
 import { InputFile } from '../components/Utils/InputFile'
@@ -13,10 +13,15 @@ import addon4 from '../static/images/addon-4.png?url'
 import defaultPicture from '../static/images/default.svg.webp?url'
 import logo from '../static/images/bg.svg?url'
 import { Title } from '../components/Utils/Title'
+import { useSearchParams } from '@solidjs/router'
+import { useFetchProfile } from '../hooks/useApi'
+import { SourceType } from '@soutien-soulevements-de-la-terre/utils'
 
 export const Index = () => {
     const [image1Src, setImage1Src] = createSignal<string>(defaultPicture)
     const [image2Src, setImage2Src] = createSignal<string>(addon1)
+    const [searchParams] = useSearchParams()
+    const { fetchProfile } = useFetchProfile()
 
     let canvas: undefined | HTMLCanvasElement
     const [canvasSignal, setCanvasSignal] = createSignal<
@@ -35,10 +40,14 @@ export const Index = () => {
         setImage2Src(addon)
     }
 
-    onMount(() => {
+    onMount(async () => {
         if (canvas) {
             setCanvasSignal(canvas)
         }
+
+        const res = await fetchProfile(searchParams.source as SourceType)
+        console.log(res)
+        setImage1Src(res.url)
     })
 
     return (
@@ -75,6 +84,12 @@ export const Index = () => {
                         <i i-tabler={'upload'} mr-3 />
                         Choisi une image
                     </InputFile>
+                    <a href={'http://localhost:3000/auth/twitter'} button>
+                        Se connecter avec Twitter
+                    </a>
+                    <a href={'http://localhost:3000/auth/facebook'} button>
+                        Se connecter avec Facebook
+                    </a>
                 </form>
                 <h2 mb-2>Choisi un overlay :</h2>
                 <AddonsList

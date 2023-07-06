@@ -1,9 +1,6 @@
 import { Request, Response, Router } from 'express'
-import {
-    TWITTER_COOKIE,
-    TWITTER_STATE,
-    twitterAuthClient,
-} from '../../utils/twitter'
+import { TWITTER_STATE, twitterAuthClient } from '../../utils/twitter'
+import { Token } from '@soutien-soulevements-de-la-terre/utils'
 
 const router = Router()
 
@@ -16,7 +13,6 @@ router.get('/', (req: Request, res: Response) => {
     res.redirect(authUrl)
 })
 router.get('/callback', async (req: Request, res: Response) => {
-    const now = new Date(Date.now())
     try {
         const { code, state } = req.query
         if (state !== TWITTER_STATE) {
@@ -25,11 +21,8 @@ router.get('/callback', async (req: Request, res: Response) => {
         const result = await twitterAuthClient.requestAccessToken(
             code as string
         )
-        res.cookie(TWITTER_COOKIE, result.token.access_token, {
-            expires: new Date(now.setDate(now.getDate() + 10)),
-        })
         twitterAuthClient.token = result.token
-        return res.send(result)
+        res.send(result.token as Token)
     } catch (error) {
         res.status(500).send({ msg: 'Error occurred' })
     }

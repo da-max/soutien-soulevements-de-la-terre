@@ -1,4 +1,4 @@
-import { ImageProperties } from '../hooks/utils'
+import { ImageProperties } from '../hooks/useGenerateImage'
 
 export interface RenderImageProps {
     imageProperties: ImageProperties

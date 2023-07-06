@@ -1,0 +1,3 @@
+{
+  "extends": ["@soutien-soulevements-de-la-terre/eslint-config"]
+}
