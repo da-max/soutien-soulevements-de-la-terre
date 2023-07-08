@@ -1,0 +1,10 @@
+{
+  "extends": "@soutien-soulevements-de-la-terre/ts-config/tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "lib": ["ESNext"],
+    "emitDeclarationOnly": true,
+    "outDir": "dist"
+  },
+  "exclude": ["dist"]
+}

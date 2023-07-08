@@ -16,12 +16,14 @@ import { Title } from '../components/Utils/Title'
 import { useSearchParams } from '@solidjs/router'
 import { useFetchProfile } from '../hooks/useApi'
 import { SourceType } from '@soutien-soulevements-de-la-terre/utils'
+import { getSource } from '../utils'
 
 export const Index = () => {
     const [image1Src, setImage1Src] = createSignal<string>(defaultPicture)
     const [image2Src, setImage2Src] = createSignal<string>(addon1)
-    const [searchParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams()
     const { fetchProfile } = useFetchProfile()
+    const source = getSource()
 
     let canvas: undefined | HTMLCanvasElement
     const [canvasSignal, setCanvasSignal] = createSignal<
@@ -46,8 +48,11 @@ export const Index = () => {
         }
 
         const res = await fetchProfile(searchParams.source as SourceType)
-        console.log(res)
         setImage1Src(res.url)
+
+        if (source) {
+            setSearchParams({ source })
+        }
     })
 
     return (

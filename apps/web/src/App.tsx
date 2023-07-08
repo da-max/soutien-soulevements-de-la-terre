@@ -7,12 +7,12 @@ import { Index } from './pages/Index'
 import { About } from './pages/About'
 import { Callback } from './pages/Callback'
 import { MatchFilters } from '@solidjs/router/dist/types'
-import { CallbackType } from './hooks/useApi'
 import { setTokenAxiosHeader } from './utils'
 import axios from 'axios'
+import { SourceType } from '@soutien-soulevements-de-la-terre/utils'
 
 const filters: MatchFilters = {
-    type: Object.values(CallbackType),
+    type: Object.values(SourceType),
 }
 
 export const App = () => {

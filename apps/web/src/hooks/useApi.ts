@@ -2,12 +2,7 @@ import axios, { AxiosResponse } from 'axios'
 import { SourceType, Token } from '@soutien-soulevements-de-la-terre/utils'
 import { ProfileResponseData } from '../types/api'
 
-export enum CallbackType {
-    FACEBOOK = 'facebook',
-    TWITTER = 'twitter',
-}
-
-export const useFetchCallback = (type: CallbackType) => {
+export const useFetchCallback = (type: SourceType) => {
     const fetchCallback = async (
         code: string,
         state?: string

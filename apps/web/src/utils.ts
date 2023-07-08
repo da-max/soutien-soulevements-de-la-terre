@@ -1,7 +1,8 @@
-import { Token } from '@soutien-soulevements-de-la-terre/utils'
+import { SourceType, Token } from '@soutien-soulevements-de-la-terre/utils'
 import axios from 'axios'
 
 export const TOKEN_NAME = 'token'
+export const SOURCE_NAME = 'source'
 
 export const getToken = (): Token | undefined => {
     const token = localStorage.getItem(TOKEN_NAME)
@@ -20,4 +21,13 @@ export const setTokenAxiosHeader = () => {
             'authorization'
         ] = `${token.token_type} ${token.access_token}`
     }
+}
+
+export const setSource = (source: SourceType) => {
+    localStorage.setItem(SOURCE_NAME, source)
+}
+
+export const getSource = (): string | undefined => {
+    const source = localStorage.getItem(SOURCE_NAME)
+    return source ? source : undefined
 }

@@ -1,14 +1,15 @@
 import { Title } from '../components/Utils/Title'
 import { useNavigate, useParams, useSearchParams } from '@solidjs/router'
 import { onMount } from 'solid-js'
-import { CallbackType, useFetchCallback } from '../hooks/useApi'
-import { setToken } from '../utils'
+import { useFetchCallback } from '../hooks/useApi'
+import { setSource, setToken } from '../utils'
+import { SourceType } from '@soutien-soulevements-de-la-terre/utils'
 
 export const Callback = () => {
     const [searchParams] = useSearchParams()
     const params = useParams()
     const navigate = useNavigate()
-    const { fetchCallback } = useFetchCallback(params.type as CallbackType)
+    const { fetchCallback } = useFetchCallback(params.type as SourceType)
     onMount(async () => {
         if (searchParams.code) {
             const res = await fetchCallback(
@@ -17,6 +18,7 @@ export const Callback = () => {
             )
             if (res) {
                 setToken(res)
+                setSource(params.type as SourceType)
             }
         }
         navigate(`/?source=${params.type}`, { replace: true })

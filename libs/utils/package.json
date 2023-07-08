@@ -2,17 +2,24 @@
   "name": "@soutien-soulevements-de-la-terre/utils",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
   "scripts": {
+    "dev": "rollup -c --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "module": "dist/index.mjs",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@soutien-soulevements-de-la-terre/eslint-config": "workspace:^",
     "@soutien-soulevements-de-la-terre/prettier-config": "workspace:^",
-    "@soutien-soulevements-de-la-terre/ts-config": "workspace:^"
+    "@soutien-soulevements-de-la-terre/ts-config": "workspace:^",
+    "esbuild": "^0.18.11",
+    "rollup": "^3.26.2",
+    "rollup-plugin-dts": "^5.3.0",
+    "rollup-plugin-esbuild": "^5.0.0"
   },
   "peerDependencies": {
     "typescript": "^5.1.6"
