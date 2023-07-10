@@ -85,17 +85,54 @@ export const Index = () => {
                 }
             >
                 <form text-center mb-8>
-                    <InputFile name={'file'} onChange={onChange}>
-                        <i i-tabler={'upload'} mr-3 />
-                        Choisi une image
-                    </InputFile>
-                    <a href={'http://localhost:3000/auth/twitter'} button>
-                        Se connecter avec Twitter
-                    </a>
-                    <a href={'http://localhost:3000/auth/facebook'} button>
-                        Se connecter avec Facebook
-                    </a>
+                    <div flex={'~ col items-center gap-4'} mb-4>
+                        <InputFile name={'file'} onChange={onChange}>
+                            <i i-tabler={'upload'} mr-3 />
+                            Choisi une image
+                        </InputFile>
+                        <p
+                            w={'50%'}
+                            text-center
+                            b-b={'1px solid #000'}
+                            line-height={'0.1em'}
+                            m={'10px 0 20px'}
+                        >
+                            <span bg={'#fff'} p={'0 10px'}>
+                                Ou
+                            </span>
+                        </p>
+                    </div>
+                    <h3 text-left mb-3>
+                        Récupère ta photo de profil depuis :
+                    </h3>
+                    <div flex={'~ col items-center gap-3'}>
+                        <a
+                            href={'http://localhost:3000/auth/twitter'}
+                            button
+                            bg={'#1d9bf0'}
+                        >
+                            <i i-tabler={'brand-twitter'} mr-3 /> Twitter
+                        </a>
+                        <a
+                            href={'http://localhost:3000/auth/facebook'}
+                            button
+                            bg={'#2374e1'}
+                        >
+                            <i i-tabler={'brand-facebook'} mr-3 /> Facebook
+                        </a>
+                    </div>
                 </form>
+                <p
+                    w={'100%'}
+                    text-center
+                    b-b={'1px solid #000'}
+                    line-height={'0.1em'}
+                    m={'10px 0 20px'}
+                >
+                    <span bg={'#fff'} p={'0 10px'}>
+                        Puis
+                    </span>
+                </p>
                 <h2 mb-2>Choisi un overlay :</h2>
                 <AddonsList
                     selectedAddon={image2Src()}

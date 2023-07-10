@@ -34,6 +34,7 @@ router.get('/twitter', async (req: Request, res: Response) => {
             res.send({ url: result })
         }
     } catch (error) {
+        console.log(error)
         res.status(500).send({ msg: 'Error occurred' })
     }
 })
