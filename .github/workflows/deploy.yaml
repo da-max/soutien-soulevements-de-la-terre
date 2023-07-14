@@ -52,6 +52,9 @@ jobs:
           push: true
           tags: ${{ github.repository }}/api:latest
           file: docker/Dockerfile-prod
+          build-args: |
+            PACKAGE_NAME=api
+            
 
 
 
