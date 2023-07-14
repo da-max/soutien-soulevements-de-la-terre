@@ -32,7 +32,7 @@ WORKDIR /app
 
 RUN pnpm install -r --reporter=append-only --ignore-scripts --filter @soutien-soulevements-de-la-terre/${PACKAGE_NAME}
 
-COPY ../libs libs/
+COPY libs/ libs/
 COPY apps/${PACKAGE_NAME} apps/${PACKAGE_NAME}
 
 RUN pnpm run -r --filter @soutien-soulevements-de-la-terre/${PACKAGE_NAME} build
