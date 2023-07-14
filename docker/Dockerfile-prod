@@ -1,0 +1,64 @@
+FROM node:lts-alpine as pnpm
+ENV PNPM_VERSION 8.6.7
+LABEL authors="Maxime Ben Hassen <maxime.benhassen@fedabian.fr>"
+
+RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
+
+ENV PNPM_HOME="/root/.local/share/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+FROM pnpm as install
+
+ARG PACKAGE_NAME=""
+
+WORKDIR /app
+
+COPY ../pnpm-lock.yaml ./
+COPY ../pnpm-workspace.yaml ./
+COPY *.json ./
+
+COPY ../libs/utils/package.json libs/utils/package.json
+COPY ../libs/ts-config/package.json libs/ts-config/package.json
+COPY ../libs/prettier-config/package.json libs/prettier-config/package.json
+COPY ../libs/eslint-config/package.json libs/eslint-config/package.json
+
+COPY apps/${PACKAGE_NAME}/package.json apps/${PACKAGE_NAME}/package.json
+
+FROM install as builder
+
+ARG PACKAGE_NAME=""
+
+WORKDIR /app
+
+RUN pnpm install -r --reporter=append-only --ignore-scripts --filter @soutien-soulevements-de-la-terre/${PACKAGE_NAME}
+
+COPY ../libs libs/
+COPY apps/${PACKAGE_NAME} apps/${PACKAGE_NAME}
+
+WORKDIR /app/apps/${PACKAGE_NAME}
+
+RUN pnpm run build
+
+FROM install as runner
+
+ARG PACKAGE_NAME=""
+ARG PORT=3000
+ARG NODE_ENV="production"
+ARG NPM_CONFIG_LOGLEVEL="warn"
+ENV NPM_CONFIG_LOGLEVEL ${NPM_CONFIG_LOGLEVEL}
+ENV NODE_ENV ${NODE_ENV}
+ENV PORT ${PORT}
+
+WORKDIR /app
+
+RUN pnpm install -rP --no-optional --frozen-lockfile --reporter=append-only --ignore-scripts --shamefully-hoist --filter @soutien-soulevements-de-la-terre/${PACKAGE_NAME} && \
+    pnpm store prune && \
+    rm -rf ./.pnpm-store
+
+COPY --from=builder /app/libs ./libs
+
+WORKDIR /app/apps/${PACKAGE_NAME}
+
+COPY --from=builder /app/apps/${PACKAGE_NAME}/dist ./dist
+
+CMD ["pnpm", "run", "start", "--filter", "@soutien-soulevements-de-la-terre/${PACKAGE_NAME}"]

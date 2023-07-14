@@ -4,7 +4,7 @@ services:
     app:
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: docker/Dockerfile-dev
         command: "sh -c 'pnpm i && pnpm run --parallel dev'"
         volumes:
             - .:/usr/src/app:z

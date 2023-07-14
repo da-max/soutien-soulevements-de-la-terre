@@ -1,0 +1,9 @@
+node_modules
+.gitignore
+.github
+.husky
+.eslintcache
+.idea
+.pnpm-store
+compose.yaml
+.eslintrc.json
