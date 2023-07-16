@@ -88,7 +88,8 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
           script: |
             docker login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ${{ secrets.REGISTRY }}
             docker pull ${{ github.repository }}/api:latest
