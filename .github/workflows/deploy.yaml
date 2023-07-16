@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           name: github-pages
-          path: dist
+          path: apps/web/dist
 
   build-api:
 
