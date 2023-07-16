@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: 18.x
 
-      - run: echo "${{ vars.ENV_FILE }}" > .env
+      - run: echo "${{ vars.ENV_FILE }}" > apps/web/.env
       - run: cat .env
       - run: npm install -g pnpm
       - run: pnpm install
@@ -105,7 +105,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd ssdlt
-            echo "${{ vars.ENV_FILE }}" > .env
+            echo "${{ secrets.ENV_FILE }}" > .env
             docker login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ${{ secrets.REGISTRY }}
             docker pull ${{ env.API_IMAGE }}
             docker run -p 3003:3000 --env-file .env -d ${{ env.API_IMAGE }}
