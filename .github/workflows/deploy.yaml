@@ -24,7 +24,6 @@ jobs:
           node-version: 18.x
 
       - run: echo "${{ vars.ENV_FILE }}" > apps/web/.env
-      - run: cat .env
       - run: npm install -g pnpm
       - run: pnpm install
       - run: pnpm run -r build
