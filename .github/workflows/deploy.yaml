@@ -50,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ghcr.io/soutien-soulevements-de-la-terre/api:latest
+          tags: ${{ secrets.REGISTRY }}/${{ github.repository }}/api:latest
           file: docker/Dockerfile-prod
           build-args: |
             PACKAGE_NAME=api
