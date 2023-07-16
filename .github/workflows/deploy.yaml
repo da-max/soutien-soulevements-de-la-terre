@@ -6,6 +6,7 @@ on:
 
 env:
   API_IMAGE: ${{ secrets.REGISTRY }}/${{ github.repository }}/api:latest
+  API_CONTAINER: ssdtl_api
 
 jobs:
   build-app:
@@ -107,4 +108,5 @@ jobs:
             echo "${{ secrets.ENV_FILE }}" > .env
             docker login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ${{ secrets.REGISTRY }}
             docker pull ${{ env.API_IMAGE }}
-            docker run -p 3003:3000 --env-file .env -d --restart yes ${{ env.API_IMAGE }}
+            docker stop ${{ env.API_CONTAINER }}
+            docker run -p 3003:3000 --env-file .env -d --name ${{ env.API_CONTAINER }} ${{ env.API_IMAGE }}
