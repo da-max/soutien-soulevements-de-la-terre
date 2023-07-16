@@ -13,14 +13,14 @@ ARG PACKAGE_NAME=""
 
 WORKDIR /app
 
-COPY ../pnpm-lock.yaml ./
-COPY ../pnpm-workspace.yaml ./
+COPY ./pnpm-lock.yaml ./
+COPY ./pnpm-workspace.yaml ./
 COPY *.json ./
 
-COPY ../libs/utils/package.json libs/utils/package.json
-COPY ../libs/ts-config/package.json libs/ts-config/package.json
-COPY ../libs/prettier-config/package.json libs/prettier-config/package.json
-COPY ../libs/eslint-config/package.json libs/eslint-config/package.json
+COPY ./libs/utils/package.json libs/utils/package.json
+COPY ./libs/ts-config/package.json libs/ts-config/package.json
+COPY ./libs/prettier-config/package.json libs/prettier-config/package.json
+COPY ./libs/eslint-config/package.json libs/eslint-config/package.json
 
 COPY apps/${PACKAGE_NAME}/package.json apps/${PACKAGE_NAME}/package.json
 
@@ -32,10 +32,10 @@ WORKDIR /app
 
 RUN pnpm install -r --reporter=append-only --ignore-scripts --filter @soutien-soulevements-de-la-terre/${PACKAGE_NAME}
 
-COPY libs/ libs/
+COPY ./libs libs/
 COPY apps/${PACKAGE_NAME} apps/${PACKAGE_NAME}
 
-RUN pnpm run -r --filter @soutien-soulevements-de-la-terre/${PACKAGE_NAME} build
+RUN pnpm run -r build
 
 FROM install as runner
 
@@ -59,4 +59,4 @@ WORKDIR /app/apps/${PACKAGE_NAME}
 
 COPY --from=builder /app/apps/${PACKAGE_NAME}/dist ./dist
 
-CMD ["pnpm", "run", "start", "--filter", "@soutien-soulevements-de-la-terre/${PACKAGE_NAME}"]
+CMD ["pnpm", "run", "--filter", "@soutien-soulevements-de-la-terre/api", "start"]
