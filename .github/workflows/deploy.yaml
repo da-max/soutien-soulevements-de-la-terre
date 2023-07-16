@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
 
+env:
+  API_IMAGE: ${{ secrets.REGISTRY }}/${{ github.repository }}/api:latest
+
 jobs:
   build-app:
 
@@ -20,6 +23,7 @@ jobs:
         with:
           node-version: 18.x
 
+      - run: echo ${{ secrets.ENV_FILE }} >> .env
       - run: npm install -g pnpm
       - run: pnpm install
       - run: pnpm run -r build
@@ -31,6 +35,10 @@ jobs:
           path: apps/web/dist
 
   build-api:
+
+    environment:
+      name: api
+      url: ${{ steps.deployment.outputs.page_url }}
 
     runs-on: ubuntu-latest
     steps:
@@ -50,7 +58,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ secrets.REGISTRY }}/${{ github.repository }}/api:latest
+          tags: $API_IMAGE
           file: docker/Dockerfile-prod
           build-args: |
             PACKAGE_NAME=api
@@ -91,5 +99,8 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
+            cd ssdlt
+            echo ${{ secrets.ENV_FILE }} >> .env
             docker login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ${{ secrets.REGISTRY }}
-            docker pull ${{ github.repository }}/api:latest
+            docker pull $API_IMAGE
+            docker run -p 3003:3000 --env-file .env -d $API_IMAGE
