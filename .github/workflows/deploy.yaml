@@ -23,7 +23,8 @@ jobs:
         with:
           node-version: 18.x
 
-      - run: echo "${{ secrets.ENV_FILE }}" >> .env
+      - run: echo "${{ secrets.ENV_FILE }}" > .env
+      - run: cat .env
       - run: npm install -g pnpm
       - run: pnpm install
       - run: pnpm run -r build
