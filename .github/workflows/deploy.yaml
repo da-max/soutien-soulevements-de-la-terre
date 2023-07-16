@@ -58,7 +58,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: $API_IMAGE
+          tags: ${{ env.API_IMAGE }}
           file: docker/Dockerfile-prod
           build-args: |
             PACKAGE_NAME=api
@@ -102,5 +102,5 @@ jobs:
             cd ssdlt
             echo ${{ secrets.ENV_FILE }} >> .env
             docker login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} ${{ secrets.REGISTRY }}
-            docker pull $API_IMAGE
-            docker run -p 3003:3000 --env-file .env -d $API_IMAGE
+            docker pull ${{ env.API_IMAGE }}
+            docker run -p 3003:3000 --env-file .env -d ${{ env.API_IMAGE }}
