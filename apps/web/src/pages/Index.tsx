@@ -107,14 +107,18 @@ export const Index = () => {
                     </h3>
                     <div flex={'~ col items-center gap-3'}>
                         <a
-                            href={'http://localhost:3000/auth/twitter'}
+                            href={`${
+                                import.meta.env.VITE_API_URL
+                            }/auth/twitter`}
                             button
                             bg={'#1d9bf0'}
                         >
                             <i i-tabler={'brand-twitter'} mr-3 /> Twitter
                         </a>
                         <a
-                            href={'http://localhost:3000/auth/facebook'}
+                            href={`${
+                                import.meta.env.VITE_API_URL
+                            }/auth/facebook`}
                             button
                             bg={'#2374e1'}
                         >
