@@ -22,7 +22,7 @@ jobs:
 
       - run: npm install -g pnpm
       - run: pnpm install
-      - run: pnpm run build
+      - run: pnpm run -r build
 
       - name: Upload the artifact
         uses: actions/upload-pages-artifact@v1
@@ -50,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ github.repository }}/api:latest
+          tags: ${{ secrets.REGISTRY }}/${{ github.repository }}/api:latest
           file: docker/Dockerfile-prod
           build-args: |
             PACKAGE_NAME=api
