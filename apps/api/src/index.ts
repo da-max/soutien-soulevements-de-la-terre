@@ -14,6 +14,8 @@ app.use(cookieParser())
 
 if (process.env.DEV) {
     app.use(cors())
+} else if (process.env.APP_URL) {
+    app.use(cors({ origin: process.env.APP_URL }))
 }
 
 app.get('/', (req: Request, res: Response) => {

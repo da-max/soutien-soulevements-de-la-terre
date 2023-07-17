@@ -29,6 +29,7 @@ router.get('/callback', async (req: Request, res: Response) => {
         )
         res.send(token)
     } catch (error) {
+        console.log(error)
         res.status(500).send({ msg: 'Error occurred' })
     }
 })

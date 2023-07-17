@@ -6,7 +6,7 @@ export const TWITTER_COOKIE = 'twitter_token'
 export const twitterAuthClient = new auth.OAuth2User({
     client_id: process.env.TWITTER_ID as string,
     client_secret: process.env.TWITTER_SECRET as string,
-    callback: process.env.TWITTER_CALLBACK as string,
+    callback: encodeURI(process.env.TWITTER_CALLBACK as string),
     scopes: ['tweet.read', 'tweet.write', 'users.read'],
 })
 
