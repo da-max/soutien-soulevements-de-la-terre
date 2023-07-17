@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite'
+import { resolve } from 'path'
 import solidPlugin from 'vite-plugin-solid'
 // import devtools from 'solid-devtools/vite';
 import UnocssPlugin from '@unocss/vite'
@@ -16,6 +17,12 @@ export default defineConfig({
         }),
     ],
     build: {
+        rollupOptions: {
+            input: {
+                main: resolve(__dirname, 'index.html'),
+                404: resolve(__dirname, '404.html'),
+            },
+        },
         target: 'esnext',
     },
 })
