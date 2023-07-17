@@ -2,7 +2,7 @@ import '@unocss/reset/tailwind.css'
 import './styles/index.css'
 
 import { Footer } from './components/Partials/Footer'
-import { Route, Router, Routes } from '@solidjs/router'
+import { hashIntegration, Route, Router, Routes } from '@solidjs/router'
 import { Index } from './pages/Index'
 import { About } from './pages/About'
 import { Callback } from './pages/Callback'
@@ -20,7 +20,7 @@ export const App = () => {
     setTokenAxiosHeader()
 
     return (
-        <Router>
+        <Router source={hashIntegration()}>
             <Routes>
                 <Route path={'/'} component={Index} />
                 <Route path={'/about'} component={About} />
